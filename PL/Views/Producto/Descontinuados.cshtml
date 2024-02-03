@@ -1,0 +1,47 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "Descontinuados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">Productos descontinuados</h1>
+<hr />
+<div>
+    @if (Model.Productos != null)
+    {
+        if (Model.Productos.Count > 0)
+        {
+            <table class="table table-dark table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Estatus</th>
+                        <th>CodProveedor</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Producto producto in Model.Productos)
+                    {
+                        <tr>
+                            <td>@producto.Nombre</td>
+                            <td>@producto.Stock</td>
+                            <td>$ @producto.PrecioUnitario</td>
+                            <td>@producto.Estatus</td>
+                            <td>@producto.Proveedor.IdProveedor</td>
+                            <td>@producto.Proveedor.Nombre</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div role="alert" class="alert alert-warning">No hay productos de este tipo.</div>
+        }
+    }
+</div>
+

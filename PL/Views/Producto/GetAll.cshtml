@@ -1,0 +1,47 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Productos</h1>
+<hr />
+<div>
+    @if(Model.Productos != null)
+    {
+        if(Model.Productos.Count > 0)
+        {
+            <table class="table table-dark table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Stock</th>
+                        <th>Precio unitario</th>
+                        <th>Categoria</th>
+                        <th>Proveedor</th>
+                        <th>Ciudad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(ML.Producto producto in Model.Productos)
+                    {
+                        <tr>
+                            <td>@producto.Nombre</td>
+                            <td>@producto.Descripcion</td>
+                            <td>@producto.Stock</td>
+                            <td>$ @producto.PrecioUnitario</td>
+                            <td>@producto.Categoria.Nombre</td>
+                            <td>@producto.Proveedor.Nombre @producto.Proveedor.ApellidoPaterno</td>
+                            <td>@producto.Proveedor.Ciudad.Nombre</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div role="alert" class="alert alert-warning">No hay productos registrados.</div>
+        }
+    }
+</div>

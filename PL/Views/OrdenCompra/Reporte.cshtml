@@ -1,0 +1,47 @@
+﻿@model ML.OrdenCompra
+@{
+    ViewData["Title"] = "Reporte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Reporte</h1>
+<hr />
+<div>
+    @if(Model.OrdenesCompra != null)
+    {
+        if(Model.OrdenesCompra.Count > 0)
+        {
+            <table class="table table-dark table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>ID Orden</th>
+                        <th>Fecha</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Cliente</th>
+                        <th>Proveedor</th>
+                        <th>Ciudad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(ML.OrdenCompra orden in Model.OrdenesCompra)
+                    {
+                        <tr>
+                            <td>@orden.IdOrdenCompra</td>
+                            <td>@orden.FechaCompra.ToShortDateString()</td>
+                            <td>@orden.Producto.Nombre</td>
+                            <td>@orden.Cantidad</td>
+                            <td>@orden.Cliente</td>
+                            <td>@orden.Producto.Proveedor.Nombre</td>
+                            <td>@orden.Producto.Proveedor.Ciudad.Nombre</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div role="alert" class="alert alert-warning">No hay ordenes de compra que cumplan con los solicitado.</div>
+        }
+    }
+</div>
